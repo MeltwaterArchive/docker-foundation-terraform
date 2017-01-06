@@ -1,9 +1,0 @@
-version: 0.1
-
-phases:
-  pre_build:
-    commands:
-      - sed -e "s/AWSCLI_VERSION_REPLACEME/$AWSCLI_VERSION/g" -e "s/SECRETARY_VERSION_REPLACEME/$SECRETARY_VERSION/g" -e "s/TERRAFORM_VERSION_REPLACEME/$TERRAFORM_VERSION/g" Dockerfile.template > Dockerfile
-  build:
-    commands:
-      - docker build -t terraform .
