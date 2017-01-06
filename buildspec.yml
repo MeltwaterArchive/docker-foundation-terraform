@@ -3,4 +3,4 @@ version: 0.1
 phases:
   build:
     commands:
-      - env
+      - docker build -t terraform .
