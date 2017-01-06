@@ -1,0 +1,27 @@
+FROM ubuntu:14.04
+
+RUN apt-get update \
+ && apt-get install -y curl git openssh-client python-pip python-yaml unzip \
+ && apt-get autoremove -y \
+ && apt-get clean
+
+ENV AWSCLI_VERSION AWSCLI_VERSION_REPLACEME
+
+ENV SECRETARY_VERSION SECRETARY_VERSION_REPLACEME
+
+ENV TERRAFORM_VERSION TERRAFORM_VERSION_REPLACEME
+
+# Install awscli
+RUN pip install awscli==${AWSCLI_VERSION} \
+ && rm -rf ~/.cache
+
+# Install secretary
+RUN curl -o /usr/local/bin/secretary -fsSL "https://github.com/meltwater/secretary/releases/download/${SECRETARY_VERSION}/secretary-`uname -s`-`uname -m`" \
+ && chmod +x /usr/local/bin/secretary
+
+# Install terraform
+RUN curl -o /tmp/terraform.zip -fsSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
+ && cd /usr/local/bin \
+ && unzip /tmp/terraform.zip \
+ && chmod +x terraform \
+ && rm /tmp/terraform.zip
