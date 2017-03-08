@@ -11,6 +11,8 @@ ENV SECRETARY_VERSION SECRETARY_VERSION_REPLACEME
 
 ENV TERRAFORM_VERSION TERRAFORM_VERSION_REPLACEME
 
+ENV TERRAGRUNT_VERSION TERRAGRUNT_VERSION_REPLACEME
+
 # Install awscli
 RUN pip install awscli==${AWSCLI_VERSION} \
  && rm -rf ~/.cache
@@ -25,3 +27,7 @@ RUN curl -o /tmp/terraform.zip -fsSL "https://releases.hashicorp.com/terraform/$
  && unzip /tmp/terraform.zip \
  && chmod +x terraform \
  && rm /tmp/terraform.zip
+
+# Install terragrunt
+RUN curl -o /usr/local/bin/terragrunt -fsSL "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" \
+ && chmod +x /usr/local/bin/terragrunt
