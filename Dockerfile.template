@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 RUN apt-get update \
- && apt-get install -y curl git openssh-client python-pip python-yaml unzip \
+ && apt-get install -y curl git graphviz openssh-client python-pip python-yaml unzip \
  && apt-get autoremove -y \
  && apt-get clean
 
